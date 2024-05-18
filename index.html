@@ -1,171 +1,85 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JSON Data Manager</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Formulario</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/2.0.4/countUp.min.js" integrity="sha512-YwCyPq75+lIz6RnVKlZWj6x6UJUw5hIW8suk5Tcclv6J4+fnm0A5lQ5kIx5DwDm+bU5jZKjUqKB6EeDvZLmYw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css" integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl7/1L_dstPt3HV5HzF6Gvk/e3s4Wz6iJgD/+ub2oU" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-    <div class="container mt-5">
-        <h2>JSON Data Manager</h2>
-        <form id="dataForm">
-            <div class="form-group">
-                <label class="form-label">LLAMADA</label>
-                <input type="text" class="form-control form-control-sm" id="InputLlamada">
-            </div>
-            <div class="form-group">
-                <label class="form-label">TELEFONO</label>
-                <input type="text" class="form-control form-control-sm" id="InputPhone">
-            </div>
-            <div class="form-group">
-                <label class="form-label">NOMBRE</label>
-                <input type="text" class="form-control form-control-sm" id="InputName">
-            </div>
-            <div class="form-group">
-                <label class="form-label">CEDULA</label>
-                <input type="text" class="form-control form-control-sm" id="InputCC">
-            </div>
-            <div class="form-group">
-                <label class="form-label">CONTRATO</label>
-                <input type="text" class="form-control form-control-sm" id="InputContrato">
-            </div>
-            <div class="form-group">
-                <label class="form-label">E-MAIL</label>
-                <input type="text" class="form-control form-control-sm" id="InputEmail">
-            </div>
-            <div class="form-group">
-                <label class="form-label">DIRECCIÓN</label>
-                <input type="text" class="form-control form-control-sm" id="InputDireccion">
-            </div>
-            <div class="form-group">
-                <label class="form-label">OE/PEDIDO</label>
-                <input type="text" class="form-control form-control-sm" id="InputPedido">
-            </div>
-            <div class="form-group">
-                <label class="form-label">RADICADO</label>
-                <input type="text" class="form-control form-control-sm" id="InputRadicado">
-            </div>
-            <div class="form-group">
-                <label class="form-label">SOLUCIÓN</label>
-                <input type="text" class="form-control form-control-sm" id="InputSolucion">
-            </div>
-            <div class="form-group">
-                <label class="form-label">RESULTADO</label>
-                <select class="form-select form-select-sm" id="InputResultado" multiple>
-                    <option value="EXITOSA">EXITOSA</option>
-                    <option value="FALLIDA">FALLIDA</option>
-                    <option value="NO ATENDIDO/CLIENTE RETIRADO">NO ATENDIDO/CLIENTE RETIRADO</option>
-                    <option value="RETIRO RECHAZADO">RETIRO RECHAZADO</option>
-                    <option value="ACCION SIN REVENTA">ACCION SIN REVENTA</option>
-                    <option value="NO PASA VALIDACION DE TITULARIDAD">NO PASA VALIDACION DE TITULARIDAD</option>
-                    <option value="MALA TRANSFERENCIA">MALA TRANSFERENCIA</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label class="form-label">DESCRIPCION</label>
-                <textarea class="form-control form-control-sm" id="InputDescripcion" rows="5"></textarea>
-            </div>
-            <div class="form-group">
-                <label class="form-label">ID DE RESCATE O DE SIEBEL</label>
-                <textarea class="form-control form-control-sm" id="generatedNumbers" rows="1" readonly></textarea>
-            </div>
-            <div class="form-group form-check">
-                <input type="checkbox" class="form-check-input" id="colecteCheckbox">
-                <label class="form-check-label">Colecte</label>
-            </div>
-            <button type="button" class="btn btn-outline-secondary generateButton">Generar Número</button>
-            <button type="button" class="btn btn-primary" id="btnAdd">Agregar</button>
-            <button type="button" class="btn btn-success" id="btnSave">Guardar en archivo</button>
-            <button type="button" class="btn btn-danger" id="btnClear">Borrar Todo</button>
+  <div class="container text-center">
+  </div>
+  <div class="container">
+    <div class="mb-5">
+      <div class="row">
+        <form id="mainForm">
+          <div class="mb-1">
+            <textarea class="form-control-sm" id="InputLlamada" rows="1"></textarea>
+            <button class="btn btn-outline-secondary copyButton" type="button" data-target="InputLlamada">COPY</button>
+            <button class="btn btn-outline-secondary pasteButton" type="button" data-target="InputLlamada">PASTE</button>
+            <label class="form-label">ID</label>
+          </div>
+          <div class="mb-1">
+            <textarea class="form-control-sm" id="InputPhone" rows="1"></textarea>
+            <button class="btn btn-outline-secondary copyButton" type="button">COPY</button>
+            <button class="btn btn-outline-secondary pasteButton" type="button">PASTE</button>
+            <label class="form-label">TELEFONO</label>
+          </div>
+          <!-- Se repite lo mismo para todos los campos -->
+          <div class="mb-1">
+            <textarea class="form-control-sm" id="InputDescripcion" rows="5"></textarea>
+            <button class="btn btn-outline-secondary copyButton" type="button">COPY</button>
+            <button class="btn btn-outline-secondary pasteButton" type="button">PASTE</button>
+            <label class="form-label">DESCRIPCION</label>
+          </div>
+          <div class="mb-1">
+            <textarea class="form-control-sm" id="generatedNumbers" rows="1" readonly></textarea>
+            <button class="btn btn-outline-secondary generateButton" type="button">GENERAR</button>
+            <button class="btn btn-outline-secondary copyButton" type="button">COPIAR</button>
+            <label class="form-label">ID DE RESCATE O DE SIEBEL</label>
+          </div>
+          <div class="mb-1 form-check">
+            <input class="form-check-input" type="checkbox" id="colecteCheckbox">
+            <label class="form-check-label">Colecte</label>
+          </div>
+          <button type="button" class="btn btn-outline-light" id="btnAdd" onclick="AddData()">GUARDAR</button>
+          <button type="button" class="btn btn-outline-light" onclick="saveDataToFile()">Guardar en Archivo de Texto</button>
+          <button type="button" class="btn btn-outline-light" id="btnUpdate">Actualizar Datos</button>
         </form>
-        <div id="dataDisplay" class="mt-5"></div>
+      </div>
     </div>
-
-    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="editModalLabel">Editar Datos</h5>
-                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="form-group">
-                            <label class="form-label">LLAMADA</label>
-                            <input type="text" class="form-control form-control-sm" id="editInputLlamada">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">TELEFONO</label>
-                            <input type="text" class="form-control form-control-sm" id="editInputPhone">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">NOMBRE</label>
-                            <input type="text" class="form-control form-control-sm" id="editInputName">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">CEDULA</label>
-                            <input type="text" class="form-control form-control-sm" id="editInputCC">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">CONTRATO</label>
-                            <input type="text" class="form-control form-control-sm" id="editInputContrato">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">E-MAIL</label>
-                            <input type="text" class="form-control form-control-sm" id="editInputEmail">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">DIRECCIÓN</label>
-                            <input type="text" class="form-control form-control-sm" id="editInputDireccion">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">OE/PEDIDO</label>
-                            <input type="text" class="form-control form-control-sm" id="editInputPedido">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">RADICADO</label>
-                            <input type="text" class="form-control form-control-sm" id="editInputRadicado">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">SOLUCIÓN</label>
-                            <input type="text" class="form-control form-control-sm" id="editInputSolucion">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">RESULTADO</label>
-                            <select class="form-select form-select-sm" id="editInputResultado" multiple>
-                                <option value="EXITOSA">EXITOSA</option>
-                                <option value="FALLIDA">FALLIDA</option>
-                                <option value="NO ATENDIDO/CLIENTE RETIRADO">NO ATENDIDO/CLIENTE RETIRADO</option>
-                                <option value="RETIRO RECHAZADO">RETIRO RECHAZADO</option>
-                                <option value="ACCION SIN REVENTA">ACCION SIN REVENTA</option>
-                                <option value="NO PASA VALIDACION DE TITULARIDAD">NO PASA VALIDACION DE TITULARIDAD</option>
-                                <option value="MALA TRANSFERENCIA">MALA TRANSFERENCIA</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">DESCRIPCION</label>
-                            <textarea class="form-control form-control-sm" id="editInputDescripcion" rows="5"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">ID DE RESCATE O DE SIEBEL</label>
-                            <textarea class="form-control form-control-sm" id="editInputGeneratedNumbers" rows="1" readonly></textarea>
-                        </div>
-                        <div class="form-group form-check">
-                            <input type="checkbox" class="form-check-input" id="editColecteCheckbox">
-                            <label class="form-check-label">Colecte</label>
-                        </div>
-                        <button type="button" class="btn btn-primary" id="btnUpdate">Actualizar</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="script.js"></script>
+    <hr>
+    <table class="table table-bordered" id="tableData">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Teléfono</th>
+          <th>Nombre</th>
+          <th>Cedula</th>
+          <th>Contrato</th>
+          <th>Email</th>
+          <th>Direccion</th>
+          <th>Pedido</th>
+          <th>Radicado</th>
+          <th>Solucion</th>
+          <th>Resultado</th>
+          <th>Descripcion</th>
+          <th>Idrescate</th>
+          <th>Colecte</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </div>
+  <script src="main.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
-  </html>
-  
+</html>
+
