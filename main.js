@@ -59,7 +59,7 @@ function ReadData() {
                     <p class="card-text"><strong>ID Rescate:</strong> ${element.idrescate}</p>
                     <p class="card-text"><strong>Colecte:</strong> ${element.colecte}</p>
                     <button class="btn btn-outline-light" onclick="deleteData(${index})">Eliminar</button>
-                    <button class="btn btn-outline-light" onclick="editData(${index})">Editar</button>
+                    <button class="btn btn-outline-light" data-toggle="modal" data-target="#editModal" onclick="openEditModal(${index})">Editar</button>
                 </div>
             </div>
         `;
@@ -114,63 +114,46 @@ function deleteData(index) {
     ReadData();
 }
 
-function editData(index) {
-    document.getElementById("btnAdd").style.display = "none";
-    document.getElementById("btnUpdate").style.display = "block";
-
+function openEditModal(index) {
     let listPeople = JSON.parse(localStorage.getItem("listPeople")) || [];
-    document.getElementById("InputLlamada").value = listPeople[index].id;
-    document.getElementById("InputPhone").value = listPeople[index].telefono;
-    document.getElementById("InputName").value = listPeople[index].nombre;
-    document.getElementById("InputCedula").value = listPeople[index].cedula;
-    document.getElementById("InputContrato").value = listPeople[index].contrato;
-    document.getElementById("InputEmail").value = listPeople[index].email;
-    document.getElementById("InputDireccion").value = listPeople[index].direccion;
-    document.getElementById("InputPedido").value = listPeople[index].pedido;
-    document.getElementById("InputRadicado").value = listPeople[index].radicado;
-    document.getElementById("InputSolucion").value = listPeople[index].solucion;
-    document.getElementById("InputResultado").value = listPeople[index].resultado;
-    document.getElementById("InputDescripcion").value = listPeople[index].descripcion;
-    document.getElementById("generatedNumbers").value = listPeople[index].idrescate;
-    document.getElementById("colecteCheckbox").checked = listPeople[index].colecte === "Si";
+    document.getElementById("editInputLlamada").value = listPeople[index].id;
+    document.getElementById("editInputPhone").value = listPeople[index].telefono;
+    document.getElementById("editInputName").value = listPeople[index].nombre;
+    document.getElementById("editInputCedula").value = listPeople[index].cedula;
+    document.getElementById("editInputContrato").value = listPeople[index].contrato;
+    document.getElementById("editInputEmail").value = listPeople[index].email;
+    document.getElementById("editInputDireccion").value = listPeople[index].direccion;
+    document.getElementById("editInputPedido").value = listPeople[index].pedido;
+    document.getElementById("editInputRadicado").value = listPeople[index].radicado;
+    document.getElementById("editInputSolucion").value = listPeople[index].solucion;
+    document.getElementById("editInputResultado").value = listPeople[index].resultado;
+    document.getElementById("editInputDescripcion").value = listPeople[index].descripcion;
+    document.getElementById("editGeneratedNumbers").value = listPeople[index].idrescate;
+    document.getElementById("editColecteCheckbox").checked = listPeople[index].colecte === "Si";
 
-    document.querySelector("#btnUpdate").onclick = function() {
-        listPeople[index].id = document.getElementById("InputLlamada").value;
-        listPeople[index].telefono = document.getElementById("InputPhone").value;
-        listPeople[index].nombre = document.getElementById("InputName").value;
-        listPeople[index].cedula = document.getElementById("InputCedula").value;
-        listPeople[index].contrato = document.getElementById("InputContrato").value;
-        listPeople[index].email = document.getElementById("InputEmail").value;
-        listPeople[index].direccion = document.getElementById("InputDireccion").value;
-        listPeople[index].pedido = document.getElementById("InputPedido").value;
-        listPeople[index].radicado = document.getElementById("InputRadicado").value;
-        listPeople[index].solucion = document.getElementById("InputSolucion").value;
-        listPeople[index].resultado = document.getElementById("InputResultado").value;
-        listPeople[index].descripcion = document.getElementById("InputDescripcion").value;
-        listPeople[index].idrescate = document.getElementById("generatedNumbers").value;
-        listPeople[index].colecte = document.getElementById("colecteCheckbox").checked ? "Si" : "No";
-
-        localStorage.setItem("listPeople", JSON.stringify(listPeople));
-        ReadData();
-        document.getElementById("mainForm").reset();
-        document.getElementById("btnAdd").style.display = "block";
-        document.getElementById("btnUpdate").style.display = "none";
-    }
+    document.getElementById("saveChangesButton").onclick = function () {
+        saveChanges(index);
+    };
 }
 
-function saveDataToFile() {
-    let listPeople = localStorage.getItem("listPeople");
-    if (!listPeople) {
-        console.log("No hay datos para guardar.");
-        return;
-    }
+function saveChanges(index) {
+    let listPeople = JSON.parse(localStorage.getItem("listPeople")) || [];
+    listPeople[index].id = document.getElementById("editInputLlamada").value;
+    listPeople[index].telefono = document.getElementById("editInputPhone").value;
+    listPeople[index].nombre = document.getElementById("editInputName").value;
+    listPeople[index].cedula = document.getElementById("editInputCedula").value;
+    listPeople[index].contrato = document.getElementById("editInputContrato").value;
+    listPeople[index].email = document.getElementById("editInputEmail").value;
+    listPeople[index].direccion = document.getElementById("editInputDireccion").value;
+    listPeople[index].pedido = document.getElementById("editInputPedido").value;
+    listPeople[index].radicado = document.getElementById("editInputRadicado").value;
+    listPeople[index].solucion = document.getElementById("editInputSolucion").value;
+    listPeople[index].resultado = document.getElementById("editInputResultado").value;
+    listPeople[index].descripcion = document.getElementById("editInputDescripcion").value;
+    listPeople[index].idrescate = document.getElementById("editGeneratedNumbers").value;
+    listPeople[index].colecte = document.getElementById("editColecteCheckbox").checked ? "Si" : "No";
 
-    let blob = new Blob([listPeople], { type: "application/json" });
-    let url = URL.createObjectURL(blob);
-    let a = document.createElement("a");
-    a.href = url;
-    a.download = "data.json";
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
+    localStorage.setItem("listPeople", JSON.stringify(listPeople));
+    ReadData();
+    $('#editModal').modal('hide');
 }
