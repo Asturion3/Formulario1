@@ -8,138 +8,103 @@
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/2.0.4/countUp.min.js" integrity="sha512-YwCyPq75+lIz6RnVKlZWj6x6UJUw5hIW8suk5Tcclv6J4+fnm0A5lQ5kIx5DwDm+bU5jZKjUqKB6EeDvZLmYw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css" integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl7/1L_dstPt3HV5HzF6Gvk/e3s4Wz6iJgD/+ub2oU" crossorigin="anonymous" referrerpolicy="no-referrer" />
-</head>
-<body>
-  <div class="container text-center">
-  </div>
-  <div class="container">
-    <div class="mb-5">
-      <div class="row">
-        <form id="mainForm">
-          <div class="mb-1">
-            <textarea class="form-control-sm" id="InputLlamada" rows="1"></textarea>
-            <button class="btn btn-outline-secondary copyButton" type="button" data-target="InputLlamada">COPY</button>
-            <button class="btn btn-outline-secondary pasteButton" type="button" data-target="InputLlamada">PASTE</button>
-            <label class="form-label">ID</label>
-          </div>
-          <div class="mb-1">
-            <textarea class="form-control-sm" id="InputPhone" rows="1"></textarea>
-            <button class="btn btn-outline-secondary copyButton" type="button">COPY</button>
-            <button class="btn btn-outline-secondary pasteButton" type="button">PASTE</button>
-            <label class="form-label">TELEFONO</label>
-          </div>
-          <div class="mb-1">
-    <textarea class="form-control-sm" id="InputName" rows="1" ></textarea>
-     <button class="btn btn-outline-secondary copyButton" type="button">COPY</button>
-  <button class="btn btn-outline-secondary pasteButton" type="button">PASTE</button>
-  <label class="form-label">NOMBRE</label>
-  </div>
-   <div class="mb-1">
-     <textarea class="form-control-sm" id="InputCC" rows="1" ></textarea>
-     <button class="btn btn-outline-secondary copyButton" type="button">COPY</button>
-  <button class="btn btn-outline-secondary pasteButton" type="button">PASTE</button>
-  <label class="form-label">CEDULA</label>
-  </div>
-   <div class="mb-1">
-   <textarea class="form-control-sm" id="InputContrato" rows="1" ></textarea>
-     <button class="btn btn-outline-secondary copyButton" type="button">COPY</button>
-  <button class="btn btn-outline-secondary pasteButton" type="button">PASTE</button>
-  <label class="form-label">CONTRATO</label>
-  </div>
-   <div class="mb-1">
-  <textarea class="form-control-sm" id="InputEmail" rows="1" ></textarea>
-     <button class="btn btn-outline-secondary copyButton" type="button">COPY</button>
-  <button class="btn btn-outline-secondary pasteButton" type="button">PASTE</button>
-  <label class="form-label">E-MAIL</label>
-  </div>
-   <div class="mb-1">
-    <textarea class="form-control-sm" id="InputDireccion" rows="1" ></textarea>
-     <button class="btn btn-outline-secondary copyButton" type="button">COPY</button>
-  <button class="btn btn-outline-secondary pasteButton" type="button">PASTE</button>
-  <label class="form-label">DIRECCIÓN</label>
-  </div>
-   <div class="mb-1">
-  <textarea class="form-control-sm" id="InputPedido" rows="1" ></textarea>
-     <button class="btn btn-outline-secondary copyButton" type="button">COPY</button>
-  <button class="btn btn-outline-secondary pasteButton" type="button">PASTE</button>
-  <label class="form-label">OE/PEDIDO</label>
-  </div>
-   <div class="mb-1">
-    <textarea class="form-control-sm" id="InputRadicado" rows="1" ></textarea>
-     <button class="btn btn-outline-secondary copyButton" type="button">COPY</button>
-  <button class="btn btn-outline-secondary pasteButton" type="button">PASTE</button>
-  <label class="form-label">RADICADO</label>
-  </div>
-   <div class="mb-1">
-   <textarea class="form-control-sm" id="InputSolucion" rows="1" ></textarea>
-     <button class="btn btn-outline-secondary copyButton" type="button">COPY</button>
-  <button class="btn btn-outline-secondary pasteButton" type="button">PASTE</button>
-  <label class="form-label">SOLUCIÓN</label>
-  </div>
-          <div class="mb-1">
-    <select class="form-select form-select-sm" id="InputResultado" multiple>
-        <option value="EXITOSA">EXITOSA</option>
-        <option value="FALLIDA">FALLIDA</option>
-        <option value="NO ATENDIDO/CLIENTE RETIRADO">NO ATENDIDO/CLIENTE RETIRADO</option>
-        <option value="RETIRO RECHAZADO">RETIRO RECHAZADO</option>
-        <option value="ACCION SIN REVENTA">ACCION SIN REVENTA</option>
-        <option value="NO PASA VALIDACION DE TITULARIDAD">NO PASA VALIDACION DE TITULARIDAD</option>
-        <option value="MALA TRANSFERENCIA">MALA TRANSFERENCIA</option>
-      <!-- Agrega más opciones según sea necesario -->
-    </select>
-    <label class="form-label">RESULTADO</label>
-          </div>
-          <div class="mb-1">
-            <textarea class="form-control-sm" id="InputDescripcion" rows="5"></textarea>
-            <button class="btn btn-outline-secondary copyButton" type="button">COPY</button>
-            <button class="btn btn-outline-secondary pasteButton" type="button">PASTE</button>
-            <label class="form-label">DESCRIPCION</label>
-          </div>
-          <div class="mb-1">
-            <textarea class="form-control-sm" id="generatedNumbers" rows="1" readonly></textarea>
-            <button class="btn btn-outline-secondary generateButton" type="button">GENERAR</button>
-            <button class="btn btn-outline-secondary copyButton" type="button">COPIAR</button>
-            <label class="form-label">ID DE RESCATE O DE SIEBEL</label>
-          </div>
-          <div class="mb-1 form-check">
-            <input class="form-check-input" type="checkbox" id="colecteCheckbox">
-            <label class="form-check-label">Colecte</label>
-          </div>
-          <button type="button" class="btn btn-outline-light" id="btnAdd" onclick="AddData()">GUARDAR</button>
-          <button type="button" class="btn btn-outline-light" onclick="saveDataToFile()">Guardar en Archivo de Texto</button>
-          <button type="button" class="btn btn-outline-light" id="btnUpdate">Actualizar Datos</button>
-        </form>
+  </head>
+  <body>
+    <div class="container">
+      <form id="mainForm">
+        <div class="mb-3">
+          <label for="InputLlamada" class="form-label">ID</label>
+          <textarea class="form-control" id="InputLlamada" rows="1"></textarea>
+          <button class="btn btn-outline-secondary copyButton" type="button" data-target="InputLlamada">COPY</button>
+          <button class="btn btn-outline-secondary pasteButton" type="button" data-target="InputLlamada">PASTE</button>
+        </div>
+        <div class="mb-3">
+          <label for="InputPhone" class="form-label">TELEFONO</label>
+          <textarea class="form-control" id="InputPhone" rows="1"></textarea>
+          <button class="btn btn-outline-secondary copyButton" type="button" data-target="InputPhone">COPY</button>
+          <button class="btn btn-outline-secondary pasteButton" type="button" data-target="InputPhone">PASTE</button>
+        </div>
+        <div class="mb-3">
+          <label for="InputName" class="form-label">NOMBRE</label>
+          <textarea class="form-control" id="InputName" rows="1"></textarea>
+          <button class="btn btn-outline-secondary copyButton" type="button" data-target="InputName">COPY</button>
+          <button class="btn btn-outline-secondary pasteButton" type="button" data-target="InputName">PASTE</button>
+        </div>
+        <div class="mb-3">
+          <label for="InputCedula" class="form-label">CEDULA</label>
+          <textarea class="form-control" id="InputCedula" rows="1"></textarea>
+          <button class="btn btn-outline-secondary copyButton" type="button" data-target="InputCedula">COPY</button>
+          <button class="btn btn-outline-secondary pasteButton" type="button" data-target="InputCedula">PASTE</button>
+        </div>
+        <div class="mb-3">
+          <label for="InputContrato" class="form-label">CONTRATO</label>
+          <textarea class="form-control" id="InputContrato" rows="1"></textarea>
+          <button class="btn btn-outline-secondary copyButton" type="button" data-target="InputContrato">COPY</button>
+          <button class="btn btn-outline-secondary pasteButton" type="button" data-target="InputContrato">PASTE</button>
+        </div>
+        <div class="mb-3">
+          <label for="InputEmail" class="form-label">EMAIL</label>
+          <textarea class="form-control" id="InputEmail" rows="1"></textarea>
+          <button class="btn btn-outline-secondary copyButton" type="button" data-target="InputEmail">COPY</button>
+          <button class="btn btn-outline-secondary pasteButton" type="button" data-target="InputEmail">PASTE</button>
+        </div>
+        <div class="mb-3">
+          <label for="InputDireccion" class="form-label">DIRECCION</label>
+          <textarea class="form-control" id="InputDireccion" rows="1"></textarea>
+          <button class="btn btn-outline-secondary copyButton" type="button" data-target="InputDireccion">COPY</button>
+          <button class="btn btn-outline-secondary pasteButton" type="button" data-target="InputDireccion">PASTE</button>
+        </div>
+        <div class="mb-3">
+          <label for="InputPedido" class="form-label">PEDIDO</label>
+          <textarea class="form-control" id="InputPedido" rows="1"></textarea>
+          <button class="btn btn-outline-secondary copyButton" type="button" data-target="InputPedido">COPY</button>
+          <button class="btn btn-outline-secondary pasteButton" type="button" data-target="InputPedido">PASTE</button>
+        </div>
+        <div class="mb-3">
+          <label for="InputRadicado" class="form-label">RADICADO</label>
+          <textarea class="form-control" id="InputRadicado" rows="1"></textarea>
+          <button class="btn btn-outline-secondary copyButton" type="button" data-target="InputRadicado">COPY</button>
+          <button class="btn btn-outline-secondary pasteButton" type="button" data-target="InputRadicado">PASTE</button>
+        </div>
+        <div class="mb-3">
+          <label for="InputSolucion" class="form-label">SOLUCION</label>
+          <textarea class="form-control" id="InputSolucion" rows="1"></textarea>
+          <button class="btn btn-outline-secondary copyButton" type="button" data-target="InputSolucion">COPY</button>
+          <button class="btn btn-outline-secondary pasteButton" type="button" data-target="InputSolucion">PASTE</button>
+        </div>
+        <div class="mb-3">
+          <label for="InputResultado" class="form-label">RESULTADO</label>
+          <textarea class="form-control" id="InputResultado" rows="1"></textarea>
+          <button class="btn btn-outline-secondary copyButton" type="button" data-target="InputResultado">COPY</button>
+          <button class="btn btn-outline-secondary pasteButton" type="button" data-target="InputResultado">PASTE</button>
+        </div>
+        <div class="mb-3">
+          <label for="InputDescripcion" class="form-label">DESCRIPCION</label>
+          <textarea class="form-control" id="InputDescripcion" rows="5"></textarea>
+          <button class="btn btn-outline-secondary copyButton" type="button" data-target="InputDescripcion">COPY</button>
+          <button class="btn btn-outline-secondary pasteButton" type="button" data-target="InputDescripcion">PASTE</button>
+        </div>
+        <div class="mb-3">
+          <label for="generatedNumbers" class="form-label">ID DE RESCATE O DE SIEBEL</label>
+          <textarea class="form-control" id="generatedNumbers" rows="1" readonly></textarea>
+          <button class="btn btn-outline-secondary generateButton" type="button">GENERAR</button>
+          <button class="btn btn-outline-secondary copyButton" type="button" data-target="generatedNumbers">COPY</button>
+        </div>
+        <div class="mb-3 form-check">
+          <input class="form-check-input" type="checkbox" id="colecteCheckbox">
+          <label class="form-check-label" for="colecteCheckbox">Colecte</label>
+        </div>
+        <button type="button" class="btn btn-outline-light" id="btnAdd" onclick="AddData()">GUARDAR</button>
+        <button type="button" class="btn btn-outline-light" onclick="saveDataToFile()">Guardar en Archivo de Texto</button>
+        <button type="button" class="btn btn-outline-light" id="btnUpdate" style="display: none;">Actualizar Datos</button>
+      </form>
+    </div>
+    <div class="container mt-5">
+      <div class="row" id="cardContainer">
       </div>
     </div>
-    <hr>
-    <table class="table table-bordered" id="tableData">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Teléfono</th>
-          <th>Nombre</th>
-          <th>Cedula</th>
-          <th>Contrato</th>
-          <th>Email</th>
-          <th>Direccion</th>
-          <th>Pedido</th>
-          <th>Radicado</th>
-          <th>Solucion</th>
-          <th>Resultado</th>
-          <th>Descripcion</th>
-          <th>Idrescate</th>
-          <th>Colecte</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-      </tbody>
-    </table>
-  </div>
-  <script src="main.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>  
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
+    <script src="main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcYlGPKhXTasw" crossorigin="anonymous"></script>
+  </body>
 </html>
 
