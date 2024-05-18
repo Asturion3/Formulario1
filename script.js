@@ -1,94 +1,71 @@
-// Funcion de generar numeros de 20 digitos
-function generateNumbers() {
-    var currentDate = new Date();
-    var timestamp = currentDate.getFullYear().toString() + padNumber(currentDate.getMonth() + 1) + padNumber(currentDate.getDate()) + padNumber(currentDate.getHours()) + padNumber(currentDate.getMinutes()) + padNumber(currentDate.getSeconds());
-    var generatedNumbers = "0000" + timestamp + "000000000000000000";
-    return generatedNumbers.substring(0, 20);
-}
-
-function padNumber(number) {
-    return number.toString().padStart(2, '0');
-}
-
-document.querySelector('.generateButton').addEventListener('click', function() {
-    var generatedNumbers = generateNumbers();
-    document.getElementById('generatedNumbers').value = generatedNumbers;
-});
-
-document.querySelectorAll('.copyButton').forEach(function(button) {
-    button.addEventListener('click', function() {
-        var textarea = this.parentNode.querySelector('textarea');
-        if (textarea) {
-            copyToClipboard(textarea.value);
-        }
+document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".copyButton").forEach(button => {
+        button.addEventListener("click", () => copyToClipboard(button.dataset.target));
     });
-});
 
-document.querySelectorAll('.pasteButton').forEach(function(button) {
-    button.addEventListener('click', function() {
-        var textarea = this.parentNode.querySelector('textarea');
-        if (textarea) {
-            pasteFromClipboard(function(clipboardText) {
-                textarea.value = clipboardText;
-                console.log('Contenido pegado del portapapeles: ' + clipboardText);
-            });
-        }
+    document.querySelectorAll(".pasteButton").forEach(button => {
+        button.addEventListener("click", () => pasteFromClipboard(button.dataset.target));
     });
+
+    document.querySelector(".generateButton").addEventListener("click", generateNumber);
+
+    ReadData();
 });
 
-function copyToClipboard(text) {
-    navigator.clipboard.writeText(text)
-        .then(function() {
-            console.log('Contenido copiado al portapapeles: ' + text);
-        })
-        .catch(function(error) {
-            console.error('Error al copiar al portapapeles: ', error);
-        });
+function copyToClipboard(elementId) {
+    const element = document.getElementById(elementId);
+    element.select();
+    document.execCommand("copy");
 }
 
-function pasteFromClipboard(callback) {
-    navigator.clipboard.readText()
-        .then(function(clipboardText) {
-            callback(clipboardText);
-        })
-        .catch(function(error) {
-            console.error('Error al pegar desde el portapapeles: ', error);
-        });
+function pasteFromClipboard(elementId) {
+    const element = document.getElementById(elementId);
+    navigator.clipboard.readText().then(text => {
+        element.value = text;
+    }).catch(err => {
+        console.error('Failed to read clipboard contents: ', err);
+    });
 }
 
-// Funcion para leer los datos almacenados
+function generateNumber() {
+    const randomNum = Math.floor(Math.random() * 1e20).toString().padStart(20, '0');
+    document.getElementById("generatedNumbers").value = randomNum;
+}
+
 function ReadData() {
-    let listPeople;
-    if (localStorage.getItem('listPeople') == null) {
-        listPeople = [];
-    } else {
-        listPeople = JSON.parse(localStorage.getItem("listPeople"));
-    }
-    var html = "";
-    listPeople.forEach(function(element, index) {
-        html += "<tr>";
-        html += "<td>" + element.id + "</td>";
-        html += "<td>" + element.telefono + "</td>";
-        html += "<td>" + element.nombre + "</td>";
-        html += "<td>" + element.cedula + "</td>";
-        html += "<td>" + element.contrato + "</td>";
-        html += "<td>" + element.email + "</td>";
-        html += "<td>" + element.direccion + "</td>";
-        html += "<td>" + element.pedido + "</td>";
-        html += "<td>" + element.radicado + "</td>";
-        html += "<td>" + element.solucion + "</td>";
-        html += "<td>" + element.resultado + "</td>";
-        html += "<td>" + element.descripcion + "</td>";
-        html += "<td>" + element.idrescate + "</td>";
-        html += "<td>" + element.colecte + "</td>";
-        html += '<td><button class="btn btn-outline-light" onclick="deleteData(' + index + ')">Eliminar</button>';
-        html += '<button class="btn btn-outline-light" onclick="editData(' + index + ')">Editar</button></td>';
-        html += "</tr>";
-    });
-    document.querySelector("#tableData tbody").innerHTML = html;
-}
+    let listPeople = JSON.parse(localStorage.getItem("listPeople")) || [];
+    listPeople.sort((a, b) => b.timestamp - a.timestamp); // Ordenar por timestamp descendente
+    let cardContainer = document.getElementById("cardContainer");
+    cardContainer.innerHTML = "";
 
-document.onload = ReadData();
+    listPeople.forEach((element, index) => {
+        let card = document.createElement("div");
+        card.className = "col-md-4";
+        card.innerHTML = `
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">ID: ${element.id}</h5>
+                    <p class="card-text"><strong>Teléfono:</strong> ${element.telefono}</p>
+                    <p class="card-text"><strong>Nombre:</strong> ${element.nombre}</p>
+                    <p class="card-text"><strong>Cédula:</strong> ${element.cedula}</p>
+                    <p class="card-text"><strong>Contrato:</strong> ${element.contrato}</p>
+                    <p class="card-text"><strong>Email:</strong> ${element.email}</p>
+                    <p class="card-text"><strong>Dirección:</strong> ${element.direccion}</p>
+                    <p class="card-text"><strong>Pedido:</strong> ${element.pedido}</p>
+                    <p class="card-text"><strong>Radicado:</strong> ${element.radicado}</p>
+                    <p class="card-text"><strong>Solución:</strong> ${element.solucion}</p>
+                    <p class="card-text"><strong>Resultado:</strong> ${element.resultado}</p>
+                    <p class="card-text"><strong>Descripción:</strong> ${element.descripcion}</p>
+                    <p class="card-text"><strong>ID Rescate:</strong> ${element.idrescate}</p>
+                    <p class="card-text"><strong>Colecte:</strong> ${element.colecte}</p>
+                    <button class="btn btn-outline-light" onclick="deleteData(${index})">Eliminar</button>
+                    <button class="btn btn-outline-light" onclick="editData(${index})">Editar</button>
+                </div>
+            </div>
+        `;
+        cardContainer.appendChild(card);
+    });
+}
 
 function AddData() {
     let inputLlamada = document.getElementById("InputLlamada").value;
@@ -106,12 +83,7 @@ function AddData() {
     let generatedNumbers = document.getElementById("generatedNumbers").value;
     let colecteCheckbox = document.getElementById("colecteCheckbox").checked ? "Si" : "No";
 
-    let listPeople;
-    if (localStorage.getItem("listPeople") == null) {
-        listPeople = [];
-    } else {
-        listPeople = JSON.parse(localStorage.getItem("listPeople"));
-    }
+    let listPeople = JSON.parse(localStorage.getItem("listPeople")) || [];
     listPeople.push({
         id: inputLlamada,
         telefono: inputPhone,
@@ -126,7 +98,8 @@ function AddData() {
         resultado: inputResultado,
         descripcion: inputDescripcion,
         idrescate: generatedNumbers,
-        colecte: colecteCheckbox
+        colecte: colecteCheckbox,
+        timestamp: Date.now()
     });
 
     localStorage.setItem("listPeople", JSON.stringify(listPeople));
@@ -135,12 +108,7 @@ function AddData() {
 }
 
 function deleteData(index) {
-    let listPeople;
-    if (localStorage.getItem("listPeople") == null) {
-        listPeople = [];
-    } else {
-        listPeople = JSON.parse(localStorage.getItem("listPeople"));
-    }
+    let listPeople = JSON.parse(localStorage.getItem("listPeople")) || [];
     listPeople.splice(index, 1);
     localStorage.setItem("listPeople", JSON.stringify(listPeople));
     ReadData();
@@ -150,12 +118,7 @@ function editData(index) {
     document.getElementById("btnAdd").style.display = "none";
     document.getElementById("btnUpdate").style.display = "block";
 
-    let listPeople;
-    if (localStorage.getItem("listPeople") == null) {
-        listPeople = [];
-    } else {
-        listPeople = JSON.parse(localStorage.getItem("listPeople"));
-    }
+    let listPeople = JSON.parse(localStorage.getItem("listPeople")) || [];
     document.getElementById("InputLlamada").value = listPeople[index].id;
     document.getElementById("InputPhone").value = listPeople[index].telefono;
     document.getElementById("InputName").value = listPeople[index].nombre;
